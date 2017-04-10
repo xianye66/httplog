@@ -5,6 +5,7 @@ import (
 	"os"
 	"io"
 	"strings"
+	"github.com/kevin-zx/go-util/mysqlUtil"
 )
 
 type spiderinfo struct {
@@ -25,7 +26,10 @@ type statistics struct {
 var spiderMap = map[string]*spiderinfo{}
 
 func main(){
-	file,err := os.Open("logdata/access_log")
+	file,err := os.Open("logdata/access_log2")
+	mysqlutil.GlobalMysqlUtil = mysqlutil.MysqlUtil{}
+	mysqlutil.GlobalMysqlUtil.InitMySqlUtil("localhost", 3306,
+		"root", "", "test")
 	if err != nil{
 		print(err.Error())
 	}
@@ -35,7 +39,6 @@ func main(){
 	for   {
 		record,err := reader.Read()
 		analysisSingleRecord(record)
-
 		if err == io.EOF{
 			break
 		}
@@ -45,11 +48,12 @@ func main(){
 }
 
 func analysisSingleRecord(record []string)  {
-	if len(record) == 10{
-		judgeSpider(record[9],strings.Replace(record[3] ,"[","",-1))
+
+	if len(record) == 12{
+		judgeSpider(record[11],strings.Replace(record[3] ,"[","",-1))
 
 	}else {
-		println("adfasd")
+
 	}
 }
 
