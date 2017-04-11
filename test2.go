@@ -5,7 +5,8 @@ import (
 "time"
 )
 
-func main() {
+func main()
+{
 	//获取时间戳
 	timestamp := time.Now().Unix()
 	fmt.Println(timestamp)

@@ -11,10 +11,10 @@ import (
 
 
 func main(){
-	file,err := os.Open("logdata/access_log3")
+	file,err := os.Open("logdata/access_log2")
 	mysqlutil.GlobalMysqlUtil = mysqlutil.MysqlUtil{}
-	mysqlutil.GlobalMysqlUtil.InitMySqlUtil("localhost", 3306,
-		"root", "", "test")
+	mysqlutil.GlobalMysqlUtil.InitMySqlUtil("115.159.71.248", 3306,
+		"remote", "Iknowthat", "webanalytics")
 	if err != nil{
 		print(err.Error())
 	}
@@ -32,7 +32,6 @@ func main(){
 		}
 		println(record[3][1:len(record[3])-1])
 		tm2, _ := time.Parse("01/Jan/2006:15:04:05 -0700", record[3][1:len(record[3])-1])
-		//fmt.Println(tm2.Format("2006-01-02 15:04:05"))
 		record[3] = tm2.Format("2006-01-02 15:04:05")
 		println(record[3])
 		new := make([]interface{}, len(record))
@@ -45,7 +44,7 @@ func main(){
 		if err != nil {
 			print(err.Error())
 		}
-		r := [5]int{1,2,3,4}
+
 	}
 
 }
